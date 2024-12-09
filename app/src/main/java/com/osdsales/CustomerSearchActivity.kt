@@ -1,7 +1,9 @@
 package com.osdsales
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,22 +25,36 @@ class CustomerSearchActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        val UName =intent.getStringExtra("UName")
+        val SLCode =intent.getStringExtra("SLCode")
         val se = findViewById<EditText>(R.id.searchEditText)
+
         se.setOnEditorActionListener { v, actionId, event ->
             //Toast.makeText(this, "ค้นหา: OK", Toast.LENGTH_SHORT).show()
             recyclerView=findViewById(R.id.rvCustomer)
 
             recyclerView.layoutManager = LinearLayoutManager(this)
+            var customerList = ArrayList<CustomerModel>()
+            val myData =GetData()
+            val Stext =se.text.toString()
+            customerList = myData.GetCustomer("$SLCode","$Stext")
 
-            val customerList = ArrayList<CustomerModel>()
+            val adapter = CustomerAdapter(customerList, object : CustomerAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int) {
 
-            customerList.add(CustomerModel("1", "A", "A", "A"))
-            customerList.add(CustomerModel("2", "B", "B", "B"))
-            customerList.add(CustomerModel("3", "C", "C", "C"))
-            customerList.add(CustomerModel("4", "D", "D", "D"))
+                    var customer = customerList[position]
+                    val resultIntent = Intent()
+                    resultIntent.putExtra("customerCode", customer.customerCode)
+                    resultIntent.putExtra("customerName", customer.customerName)
+                    resultIntent.putExtra("customerShop", customer.customerShop)
+                    resultIntent.putExtra("customerProvince", customer.customerProvince)
+                    setResult(RESULT_OK, resultIntent)
+                    finish()
 
-            val adapter = CustomerAdapter(customerList)
+                }
+
+            }
+            )
 
             recyclerView.adapter = adapter
             true

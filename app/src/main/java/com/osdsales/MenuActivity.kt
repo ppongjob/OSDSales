@@ -15,9 +15,13 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         val btnMenuOrder = findViewById<Button>(R.id.btnMenuOrder)
-
+        val UName =intent.getStringExtra("UName")
+        val SLCode =intent.getStringExtra("SLCode")
         btnMenuOrder.setOnClickListener {
+
             val intent= Intent(this,OrderActivity::class.java)
+            intent.putExtra("UName",UName)
+            intent.putExtra("SLCode",SLCode)
             startActivity(intent)
         }
     }

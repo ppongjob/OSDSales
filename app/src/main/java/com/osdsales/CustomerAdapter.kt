@@ -6,14 +6,32 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CustomerAdapter(private val customerList: ArrayList<CustomerModel>): RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
-    class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
+class CustomerAdapter(
+    private val customerList: ArrayList<CustomerModel>,
+    private val listener: OnItemClickListener
+): RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    inner class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
+
 
         val customerCode = itemView.findViewById<TextView>(R.id.ivCustomerCode)
         val customerName = itemView.findViewById<TextView>(R.id.tvCustomerName)
         val customerShop = itemView.findViewById<TextView>(R.id.ivCustomerShop)
         val customerProvince = itemView.findViewById<TextView>(R.id.tvCustomerProvince)
 
+        init {
+            // ตั้งค่า Click Listener ให้กับ ViewHolder
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(position)
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerAdapter.ViewHolder {

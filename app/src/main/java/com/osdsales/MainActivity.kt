@@ -22,14 +22,14 @@ class MainActivity : AppCompatActivity() {
 
         btnOK.setOnClickListener {
             val myData =GetData()
-            val Dc: Dictionary<String, String> =myData.chkSales(teUser.text.toString(),tePassword.text.toString())
+            val Dc: MutableMap<String, String> =myData.chkSales(teUser.text.toString(),tePassword.text.toString())
             teUser.setText("")
             tePassword.setText("")
             if (Dc["uName"]   !=""){
                 //Toast.makeText(this,uName, Toast.LENGTH_SHORT).show()
                 val intent= Intent(this,MenuActivity::class.java)
                 intent.putExtra("UName",Dc["uName"])
-                intent.putExtra("BPCode",Dc["BPCode"])
+                intent.putExtra("SLCode",Dc["SLCode"])
 
                 startActivity(intent)
             }
