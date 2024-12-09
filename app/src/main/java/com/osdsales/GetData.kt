@@ -13,6 +13,7 @@ class GetData {
     var connect: Connection? = null
     var ConnectionResult = ""
     var isSuccess = false
+    //111
 
     fun chkSales(UName: String, UPassword: String): Dictionary<String,String> {
         //var chk = false
