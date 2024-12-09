@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Dictionary
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,13 +22,14 @@ class MainActivity : AppCompatActivity() {
 
         btnOK.setOnClickListener {
             val myData =GetData()
-            val uName:String =myData.chkSales(teUser.text.toString(),tePassword.text.toString())
+            val Dc: Dictionary<String, String> =myData.chkSales(teUser.text.toString(),tePassword.text.toString())
             teUser.setText("")
             tePassword.setText("")
-            if (uName   !=""){
+            if (Dc["uName"]   !=""){
                 //Toast.makeText(this,uName, Toast.LENGTH_SHORT).show()
                 val intent= Intent(this,MenuActivity::class.java)
-                intent.putExtra("UName",uName)
+                intent.putExtra("UName",Dc["uName"])
+                intent.putExtra("BPCode",Dc["BPCode"])
 
                 startActivity(intent)
             }
