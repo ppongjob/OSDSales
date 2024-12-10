@@ -38,25 +38,27 @@ class CustomerSearchActivity : AppCompatActivity() {
             val myData =GetData()
             val Stext =se.text.toString()
             customerList = myData.GetCustomer("$SLCode","$Stext")
-
-            val adapter = CustomerAdapter(customerList, object : CustomerAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int) {
-
-                    var customer = customerList[position]
-                    val resultIntent = Intent()
-                    resultIntent.putExtra("customerCode", customer.customerCode)
-                    resultIntent.putExtra("customerName", customer.customerName)
-                    resultIntent.putExtra("customerShop", customer.customerShop)
-                    resultIntent.putExtra("customerProvince", customer.customerProvince)
-                    setResult(RESULT_OK, resultIntent)
-                    finish()
-
-                }
-
+            if (customerList.size==0)
+            {
+                Toast.makeText(this,"ไม่พบข้อมูล", Toast.LENGTH_SHORT).show()
             }
-            )
+            else{
+                val adapter = CustomerAdapter(customerList, object : CustomerAdapter.OnItemClickListener {
+                    override fun onItemClick(position: Int) {
 
-            recyclerView.adapter = adapter
+                        var customer = customerList[position]
+                        val resultIntent = Intent()
+                        resultIntent.putExtra("customerCode", customer.customerCode)
+                        resultIntent.putExtra("customerName", customer.customerName)
+                        resultIntent.putExtra("customerShop", customer.customerShop)
+                        resultIntent.putExtra("customerProvince", customer.customerProvince)
+                        setResult(RESULT_OK, resultIntent)
+                        finish()
+                    }
+                }
+                )
+                recyclerView.adapter = adapter
+            }
             true
         }
 

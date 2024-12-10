@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 class OrderActivity : AppCompatActivity() {
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-
+    private lateinit var rvGoods: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +56,19 @@ class OrderActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
 
         }
+
+        rvGoods=findViewById(R.id.rvGoods)
+
+        rvGoods.layoutManager = LinearLayoutManager(this)
+
+        var GoodsList = ArrayList<GoodsModel>()
+        GoodsList.add(GoodsModel("1","1","โหล","1"))
+        GoodsList.add(GoodsModel("2","2","กระสอบ","2"))
+        GoodsList.add(GoodsModel("3","3","ลัง","3"))
+        GoodsList.add(GoodsModel("4","4","ถุง","4"))
+
+        val Goodsadapter = GoodsAdapter(GoodsList)
+        rvGoods.adapter = Goodsadapter
 
     }
 

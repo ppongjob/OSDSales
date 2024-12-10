@@ -24,7 +24,6 @@ class CustomerAdapter(
         val customerProvince = itemView.findViewById<TextView>(R.id.tvCustomerProvince)
 
         init {
-            // ตั้งค่า Click Listener ให้กับ ViewHolder
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
