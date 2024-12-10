@@ -70,6 +70,11 @@ class OrderActivity : AppCompatActivity() {
         val Goodsadapter = GoodsAdapter(GoodsList)
         rvGoods.adapter = Goodsadapter
 
+        btnAdd.setOnClickListener {
+            val intent = Intent(this, GoodsSearchActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 }
