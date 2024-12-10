@@ -26,7 +26,7 @@ class CustomerSearchActivity : AppCompatActivity() {
             insets
         }
         val UName =intent.getStringExtra("UName")
-        val SLCode =intent.getStringExtra("SLCode")
+        val SLCode =intent.getStringExtra("SLCode").toString()
         val se = findViewById<EditText>(R.id.searchEditText)
 
         se.setOnEditorActionListener { v, actionId, event ->
@@ -37,7 +37,7 @@ class CustomerSearchActivity : AppCompatActivity() {
             var customerList = ArrayList<CustomerModel>()
             val myData =GetData()
             val Stext =se.text.toString()
-            customerList = myData.GetCustomer("$SLCode","$Stext")
+            customerList = myData.GetCustomer(SLCode, Stext)
             if (customerList.size==0)
             {
                 Toast.makeText(this,"ไม่พบข้อมูล", Toast.LENGTH_SHORT).show()
