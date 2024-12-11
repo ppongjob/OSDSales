@@ -1,6 +1,8 @@
 package com.osdsales
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +18,10 @@ class GoodsSearchActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        var goodsGroup = listOf("A","B","C")
+        val GroupAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,goodsGroup)
+        GroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spGoodsGroup=findViewById<Spinner>(R.id.spGoodsGroup)
+        spGoodsGroup.adapter = GroupAdapter
     }
 }

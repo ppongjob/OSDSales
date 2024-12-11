@@ -89,7 +89,13 @@ class GetData {
                 val stmt = connect!!.createStatement()
                 val rs = stmt.executeQuery(query)
                 while (rs.next()){
-                    customerList.add(CustomerModel(rs.getString("AR_CODE"),rs.getString("AR_NAME"),rs.getString("ADDB_COMPANY"),rs.getString("ADDB_PROVINCE")))
+                    var Branch = ""
+                    if (!rs.getString("ADDB_BRANCH").isNullOrBlank())
+                    {
+                        Branch = "สาขา "+rs.getString("ADDB_BRANCH") +" "
+                    }
+
+                    customerList.add(CustomerModel(rs.getString("AR_CODE"),rs.getString("AR_NAME"),rs.getString("ADDB_COMPANY"),Branch+rs.getString("ADDB_PROVINCE")))
                 }
             }
         } catch (e :SQLException){
