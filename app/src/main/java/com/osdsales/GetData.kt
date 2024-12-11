@@ -1,12 +1,7 @@
 package com.osdsales
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.sql.Connection
 import java.sql.SQLException
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.Dictionary
 import kotlin.collections.ArrayList
 
 class GetData {
@@ -50,7 +45,7 @@ class GetData {
 
     fun GetSalesKey(SalesCode:String ):Int
     {
-        var SalesKey = 0
+        var SalesKey = -1
         try {
             val connectionHelper = ConnectionHelper()
             connect = connectionHelper.connectionOSQ()
@@ -103,6 +98,28 @@ class GetData {
         }
 
         return customerList
+    }
+
+    fun GetGoodsGroup():ArrayList<String>{
+        val GoodsGroupList = ArrayList<String>()
+
+        try {
+            val connectionHelper = ConnectionHelper()
+            connect = connectionHelper.connectionOSQ()
+            if (connect == null) {
+                ConnectionResult = "Check your internet Access!"
+            } else {
+                val query = "select * from icdept order by icdept_code"
+                val stmt = connect!!.createStatement()
+                val rs = stmt.executeQuery(query)
+                while (rs.next()){
+                    GoodsGroupList.add("")
+                }
+            }
+        } catch (e :SQLException){
+            e.printStackTrace()
+        }
+        return GoodsGroupList
     }
 
 }
