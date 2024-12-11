@@ -18,7 +18,14 @@ class GoodsSearchActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        var goodsGroup = listOf("A","B","C")
+        val goodsGroup = ArrayList<String>()
+
+        goodsGroup.add("A")
+        goodsGroup.add("B")
+        goodsGroup.add("C")
+        goodsGroup.add("D")
+        goodsGroup.add("E")
+
         val GroupAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,goodsGroup)
         GroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         val spGoodsGroup=findViewById<Spinner>(R.id.spGoodsGroup)
