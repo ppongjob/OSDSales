@@ -1,10 +1,10 @@
 package com.osdsales
 
 data class GoodsOrderModel (
-    val GoodsCode:String,
-    val GoodsName:String,
-    val GoodsUnit:String,
-    val GoodsQTY:Double,
-    val GoodsUnitFree:String,
-    val GoodsQTYFree:Double
+    var GoodsCode:String="",
+    var GoodsName:String="",
+    var GoodsUnit:ArrayList<String> = arrayListOf(),
+    var GoodsQTY:Double=0.0,
+    var GoodsUnitFree:ArrayList<String> = arrayListOf(),
+    var GoodsQTYFree:Double=0.0
 )

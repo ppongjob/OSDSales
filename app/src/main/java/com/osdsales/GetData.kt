@@ -126,5 +126,64 @@ class GetData {
         return GoodsGroupList
     }
 
+    fun GetUTQ(SKUKey:Int):ArrayList<String>{
+        val UTQList = ArrayList<String>()
+        try {
+            val connectionHelper = ConnectionHelper()
+            connect = connectionHelper.connectionOSQ()
+            if (connect == null) {
+                ConnectionResult = "Check your internet Access!"
+            } else {
+                val query = "select utq_name from goodsmaster g join uofqty u on  g.GOODS_UTQ =u.UTQ_KEY where g.goods_sku = $SKUKey  group by utq_name "
+                val stmt = connect!!.createStatement()
+                val rs = stmt.executeQuery(query)
+                while (rs.next()){
+                    UTQList.add(rs.getString("utq_name"))
+                }
+            }
+        } catch (e :SQLException){
+            e.printStackTrace()
+        }
+
+
+        return UTQList
+    }
+
+    fun GetGoodsByDept(DeptKey :Int):ArrayList<GoodsOrderModel>{
+        val GoodsOrderList = ArrayList<GoodsOrderModel>()
+
+        try {
+            val connectionHelper = ConnectionHelper()
+            connect = connectionHelper.connectionOSQ()
+            if (connect == null) {
+                ConnectionResult = "Check your internet Access!"
+            } else {
+                val query = "select s.sku_key,s.SKU_CODE ,s.SKU_NAME " +
+                        " from SKUMASTER s  " +
+                        " where s.SKU_ICDEPT = $DeptKey  and not(s.sku_code  like '%*%')" +
+                        " order by sku_code"
+                val stmt = connect!!.createStatement()
+                val rs = stmt.executeQuery(query)
+                while (rs.next()){
+                    var goodsOrder= GoodsOrderModel()
+                    goodsOrder.GoodsCode= rs.getString("SKU_CODE")
+                    goodsOrder.GoodsName= rs.getString("SKU_NAME")
+                    goodsOrder.GoodsUnit=GetUTQ(rs.getInt("sku_key"))
+                    goodsOrder.GoodsUnitFree=goodsOrder.GoodsUnit
+                    goodsOrder.GoodsQTY=0.0
+                    goodsOrder.GoodsQTYFree=0.0
+
+
+                    GoodsOrderList.add(goodsOrder)
+                }
+            }
+        } catch (e :SQLException){
+            e.printStackTrace()
+        }
+
+
+        return  GoodsOrderList
+    }
+
 }
 

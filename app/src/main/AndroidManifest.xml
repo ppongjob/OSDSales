@@ -15,7 +15,7 @@
         android:theme="@style/Theme.OSDSales"
         tools:targetApi="31">
         <activity
-            android:name=".GoodsSearchActivity"
+            android:name=".GoodsOrderActivity"
             android:exported="false" />
         <activity
             android:name=".CustomerSearchActivity"

@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-class GoodsSearchActivity : AppCompatActivity() {
+class GoodsOrderActivity : AppCompatActivity() {
+
+    private lateinit var rvGoodsOrder: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -43,10 +47,18 @@ class GoodsSearchActivity : AppCompatActivity() {
             {
                 val goodsDept = spGoodsGroup.selectedItem as GoodsDept
                 //Toast.makeText(this@GoodsSearchActivity,goodsDept.Name,Toast.LENGTH_LONG).show()
+                var GoodsOrderList = ArrayList<GoodsOrderModel>()
+
+                GoodsOrderList=GetData().GetGoodsByDept(goodsDept.key)
+
+                val GoodsOrderAdapter = GoodsOrderAdapter(GoodsOrderList)
+                rvGoodsOrder.adapter = GoodsOrderAdapter
 
             }
-
-
         }
+
+        rvGoodsOrder = findViewById(R.id.rvGoodsOrder)
+        rvGoodsOrder.layoutManager = LinearLayoutManager(this)
+
     }
 }

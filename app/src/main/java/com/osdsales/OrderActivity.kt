@@ -2,14 +2,12 @@ package com.osdsales
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -71,7 +69,7 @@ class OrderActivity : AppCompatActivity() {
         rvGoods.adapter = Goodsadapter
 
         btnAdd.setOnClickListener {
-            val intent = Intent(this, GoodsSearchActivity::class.java)
+            val intent = Intent(this, GoodsOrderActivity::class.java)
             startActivity(intent)
         }
 
