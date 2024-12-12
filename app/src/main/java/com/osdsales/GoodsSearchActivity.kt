@@ -1,8 +1,10 @@
 package com.osdsales
 
 import android.os.Bundle
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,17 +20,33 @@ class GoodsSearchActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val goodsGroup = ArrayList<String>()
+        var goodsGroup = ArrayList<GoodsDept>()
 
-        goodsGroup.add("A")
-        goodsGroup.add("B")
-        goodsGroup.add("C")
-        goodsGroup.add("D")
-        goodsGroup.add("E")
+        goodsGroup=GetData().GetGoodsGroup()
 
         val GroupAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,goodsGroup)
         GroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         val spGoodsGroup=findViewById<Spinner>(R.id.spGoodsGroup)
         spGoodsGroup.adapter = GroupAdapter
+
+        spGoodsGroup.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                // You can define you actions as you want
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: android.view.View?,
+                position: Int,
+                id: Long)
+            {
+                val goodsDept = spGoodsGroup.selectedItem as GoodsDept
+                //Toast.makeText(this@GoodsSearchActivity,goodsDept.Name,Toast.LENGTH_LONG).show()
+
+            }
+
+
+        }
     }
 }

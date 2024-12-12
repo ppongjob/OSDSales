@@ -100,8 +100,8 @@ class GetData {
         return customerList
     }
 
-    fun GetGoodsGroup():ArrayList<String>{
-        val GoodsGroupList = ArrayList<String>()
+    fun GetGoodsGroup():ArrayList<GoodsDept>{
+        val GoodsGroupList = ArrayList<GoodsDept>()
 
         try {
             val connectionHelper = ConnectionHelper()
@@ -109,11 +109,15 @@ class GetData {
             if (connect == null) {
                 ConnectionResult = "Check your internet Access!"
             } else {
-                val query = "select * from icdept order by icdept_code"
+                val query = "select icdept_key, icdept_code, icdept_thaidesc from icdept order by icdept_code"
                 val stmt = connect!!.createStatement()
                 val rs = stmt.executeQuery(query)
                 while (rs.next()){
-                    GoodsGroupList.add("")
+                    var goodsDept = GoodsDept()
+                    goodsDept.key = rs.getInt("icdept_key")
+                    goodsDept.Code = rs.getString("icdept_code")
+                    goodsDept.Name = rs.getString("icdept_thaidesc")
+                    GoodsGroupList.add(goodsDept)
                 }
             }
         } catch (e :SQLException){
@@ -123,3 +127,4 @@ class GetData {
     }
 
 }
+
