@@ -76,7 +76,7 @@ class GetData {
             if (connect == null) {
                 ConnectionResult = "Check your internet Access!"
             } else {
-                val query = "select a2.ADDB_COMPANY ,a3.AR_CODE ,a3.AR_NAME ,a2.ADDB_PROVINCE  ,a2.ADDB_BRANCH " +
+                val query = "select a2.ADDB_COMPANY ,a3.AR_CODE ,a3.AR_NAME ,a2.ADDB_PROVINCE  ,a2.ADDB_BRANCH,a2.ADDB_KEY " +
                         " from SLDETAIL s join TRANSTKH t on t.TRH_DI = s.SLD_DI join ARADDRESS a on a.ARA_ADDB = t.TRH_SHIP_ADDB  " +
                         " join ADDRBOOK a2 on a2.ADDB_KEY=  t.TRH_SHIP_ADDB join ARFILE a3 on a3.AR_KEY =a.ARA_AR " +
                         "where s.SLD_SLMN =$SlKey and (a3.AR_Name like '%$CusttomerSearch%' or a2.ADDB_COMPANY like '%$CusttomerSearch%' )" +
@@ -90,7 +90,7 @@ class GetData {
                         Branch = "สาขา "+rs.getString("ADDB_BRANCH") +" "
                     }
 
-                    customerList.add(CustomerModel(rs.getString("AR_CODE"),rs.getString("AR_NAME"),rs.getString("ADDB_COMPANY"),Branch+rs.getString("ADDB_PROVINCE")))
+                    customerList.add(CustomerModel(rs.getString("AR_CODE"),rs.getString("AR_NAME"),rs.getString("ADDB_COMPANY"),Branch+rs.getString("ADDB_PROVINCE"),rs.getInt("ADDB_KEY")))
                 }
             }
         } catch (e :SQLException){

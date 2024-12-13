@@ -44,6 +44,8 @@ class CustomerAdapter(
         holder.customerName.text = customer.customerName
         holder.customerShop.text = customer.customerShop
         holder.customerProvince.text = customer.customerProvince
+
+
     }
 
     override fun getItemCount(): Int {

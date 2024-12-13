@@ -39,13 +39,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/enGoodsQty"
-            android:layout_width="32dp"
+            android:layout_width="40dp"
             android:layout_height="41dp"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/tvGoodsOrderName"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/tvGoodsOrderName">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -63,20 +62,20 @@
             android:layout_height="wrap_content"
             android:text="แถม"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/enFreeQty"
+            app:layout_constraintEnd_toStartOf="@id/enGoodsQTYFree"
             app:layout_constraintTop_toBottomOf="@id/tvGoodsOrderName" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/enFreeQty"
-            android:layout_width="32dp"
+            android:id="@+id/enGoodsQTYFree"
+            android:layout_width="40dp"
             android:layout_height="41dp"
             android:ems="10"
             android:inputType="number"
-            app:layout_constraintEnd_toStartOf="@+id/spFreeUnit"
+            app:layout_constraintEnd_toStartOf="@+id/spQtyUnitFree"
             app:layout_constraintTop_toBottomOf="@+id/tvGoodsOrderName" />
 
         <Spinner
-            android:id="@+id/spFreeUnit"
+            android:id="@+id/spQtyUnitFree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

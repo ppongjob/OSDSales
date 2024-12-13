@@ -52,6 +52,7 @@ class CustomerSearchActivity : AppCompatActivity() {
                         resultIntent.putExtra("customerName", customer.customerName)
                         resultIntent.putExtra("customerShop", customer.customerShop)
                         resultIntent.putExtra("customerProvince", customer.customerProvince)
+                        resultIntent.putExtra("customerADDBKey", customer.customerADDBKey)
                         setResult(RESULT_OK, resultIntent)
                         finish()
                     }
