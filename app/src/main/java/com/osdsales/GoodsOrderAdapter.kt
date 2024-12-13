@@ -14,8 +14,8 @@ class GoodsOrderAdapter(private val GoodsOrderList: ArrayList<GoodsOrderModel>):
         var GoodsOrderCode = itemView.findViewById<TextView>(R.id.tvGoodsOrderCode)
         var GoodsOrderName = itemView.findViewById<TextView>(R.id.tvGoodsOrderName)
         var GoodsQTY = itemView.findViewById<EditText>(R.id.enGoodsQty)
-        var GoodsFreeQTY = itemView.findViewById<EditText>(R.id.enFreeQty)
-        var GoodsFreeUnit = itemView.findViewById<Spinner>(R.id.spFreeUnit)
+        var GoodsFreeQTY = itemView.findViewById<EditText>(R.id.enGoodsQTYFree)
+        var GoodsFreeUnit = itemView.findViewById<Spinner>(R.id.spQtyUnitFree)
         var GoodsQtyUnit =  itemView.findViewById<Spinner>(R.id.spQtyUnit)
 
     }

@@ -14,6 +14,8 @@ class GoodsAdapter (private val GoodsList: ArrayList<GoodsModel>): RecyclerView.
         val GoodsName = itemView.findViewById<TextView>(R.id.tvGoodsName)
         val GoodsUnit = itemView.findViewById<TextView>(R.id.tvGoodsUnit)
         val GoodsQTY = itemView.findViewById<TextView>(R.id.tvGoodsQTY)
+        val GoodsQTYFree = itemView.findViewById<TextView>(R.id.tvGoodsQTYFree)
+        val GoodsFreeUnit = itemView.findViewById<TextView>(R.id.tvGoodsFreeUnit)
 
     }
 
@@ -32,6 +34,8 @@ class GoodsAdapter (private val GoodsList: ArrayList<GoodsModel>): RecyclerView.
         holder.GoodsName.text = Goods.GoodsName
         holder.GoodsUnit.text = Goods.GoodsUnit
         holder.GoodsQTY.text = Goods.GoodsQTY
+        holder.GoodsQTYFree.text = Goods.GoodsQTYFree
+        holder.GoodsFreeUnit.text = Goods.GoodsFreeUnit
 
     }
 }

@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class OrderActivity : AppCompatActivity() {
 
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var customerResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var goodsResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var rvGoods: RecyclerView
+    private var GoodsList = ArrayList<GoodsModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +28,7 @@ class OrderActivity : AppCompatActivity() {
         val btnDelete = findViewById<Button>(R.id.btnDelete)
         val btnSend = findViewById<Button>(R.id.btnSend)
 
-        resultLauncher = registerForActivityResult( ActivityResultContracts.StartActivityForResult()) {
+        customerResultLauncher = registerForActivityResult( ActivityResultContracts.StartActivityForResult()) {
             result->
             if (result.resultCode == RESULT_OK) {
                 val customerCode = result.data?.getStringExtra("customerCode")
@@ -51,28 +53,35 @@ class OrderActivity : AppCompatActivity() {
             val intent = Intent(this, CustomerSearchActivity::class.java)
             intent.putExtra("UName",UName)
             intent.putExtra("SLCode",SLCode)
-            resultLauncher.launch(intent)
+            customerResultLauncher.launch(intent)
 
         }
 
-        rvGoods=findViewById(R.id.rvGoods)
+        goodsResultLauncher = registerForActivityResult( ActivityResultContracts.StartActivityForResult()) {
+            result->
+                if (result.resultCode == RESULT_OK) {
+                    val goodsCodes = result.data?.getStringArrayListExtra("GoodsSKUList")
 
-        rvGoods.layoutManager = LinearLayoutManager(this)
+                    rvGoods=findViewById(R.id.rvGoods)
 
-        var GoodsList = ArrayList<GoodsModel>()
-        GoodsList.add(GoodsModel("1","1","โหล","1"))
-        GoodsList.add(GoodsModel("2","2","กระสอบ","2"))
-        GoodsList.add(GoodsModel("3","3","ลัง","3"))
-        GoodsList.add(GoodsModel("4","4","ถุง","4"))
+                    rvGoods.layoutManager = LinearLayoutManager(this)
+                    //val goodsCode= result.data?.getStringArrayListExtra("GoodsSKUList")
+                    for(i in 0 until goodsCodes!!.size){
+                        val GoodsDetail=result.data?.getStringArrayListExtra(goodsCodes[i].toString())
+                        if (GoodsDetail!=null){
+                            GoodsList.add(GoodsModel(GoodsDetail[0],GoodsDetail[1],GoodsDetail[2],GoodsDetail[3],GoodsDetail[4],GoodsDetail[5]))
+                        }
+                        //GoodsList.add(GoodsModel(goodsCodes[i].toString(),i.toString(),"โหล","1"))
+                    }
 
-        val Goodsadapter = GoodsAdapter(GoodsList)
-        rvGoods.adapter = Goodsadapter
+                    val Goodsadapter = GoodsAdapter(GoodsList)
+                    rvGoods.adapter = Goodsadapter
+                }
+        }
 
         btnAdd.setOnClickListener {
             val intent = Intent(this, GoodsOrderActivity::class.java)
-            startActivity(intent)
+            goodsResultLauncher.launch(intent)
         }
-
     }
-
 }
